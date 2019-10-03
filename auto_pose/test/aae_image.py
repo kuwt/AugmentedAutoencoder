@@ -6,7 +6,7 @@ import os
 import time
 import argparse
 import configparser
-
+import matplotlib.pyplot as plt
 from auto_pose.ae import factory, utils
 
 
@@ -50,8 +50,15 @@ with tf.Session() as sess:
 
         pred_view = dataset.render_rot( R,downSample = 1)
     
-        cv2.imshow('resized img', cv2.resize(im/255.,(256,256)))
-        cv2.imshow('pred_view', cv2.resize(pred_view,(256,256)))
-        cv2.waitKey(0)
+        #plt.imshow(cv2.resize(im/255.,(256,256)))
+        #plt.show()
 
-
+        #plt.imshow(cv2.resize(pred_view,(256,256)))
+        #plt.show()
+        
+        #cv2.imshow('resized img', cv2.resize(im/255.,(256,256)))
+        #cv2.imshow('pred_view', cv2.resize(pred_view,(256,256)))
+        #cv2.waitKey(0)
+        cv2.imwrite('resized.png',cv2.resize(im,(256,256)))
+        cv2.imwrite('result.png', cv2.resize(pred_view,(256,256)))
+    

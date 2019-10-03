@@ -6,8 +6,11 @@ import numpy as np
 import signal
 import shutil
 import cv2
+import matplotlib.pyplot as plt
 
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+#os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+#os.environ['CUDA_VISIBLE_DEVICES'] = "0"
+
 import progressbar
 import tensorflow as tf
 
@@ -138,10 +141,12 @@ def main():
 
                 this_x, this_y = sess.run([queue.x, queue.y])
                 reconstr_train = sess.run(decoder.x,feed_dict={queue.x:this_x})
-                cv2.imshow('sample batch', np.hstack(( u.tiles(this_x, 3, 3), u.tiles(reconstr_train, 3,3),u.tiles(this_y, 3, 3))) )
-                k = cv2.waitKey(0)
-                if k == 27:
-                    break
+                plt.imshow(np.hstack(( u.tiles(this_x, 3, 3), u.tiles(reconstr_train, 3,3),u.tiles(this_y, 3, 3))), cmap='gray')
+                plt.show()
+                #cv2.imshow('sample batch', np.hstack(( u.tiles(this_x, 3, 3), u.tiles(reconstr_train, 3,3),u.tiles(this_y, 3, 3))) )
+                #k = cv2.waitKey(0)
+                #if k == 27:
+                #    break
 
             if gentle_stop[0]:
                 break

@@ -3,10 +3,11 @@ import os
 import glob
 import shutil
 
-from . import utils as u
+#from . import utils as u
+
 
 def main():
-
+	print("hello")
 	workspace_path = os.environ.get('AE_WORKSPACE_PATH')
 
 	if workspace_path == None:
