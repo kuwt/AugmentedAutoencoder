@@ -92,7 +92,7 @@ def build_codebook(encoder, dataset, args):
     codebook = Codebook(encoder, dataset, embed_bb)
     return codebook
 
-def build_codebook_from_name(experiment_name, experiment_group='', return_dataset=False, return_decoder = False):
+def build_codebook_from_name(experiment_name, experiment_group='', return_dataset=False, return_coder = False):
     import os
     import configparser
     workspace_path = os.environ.get('AE_WORKSPACE_PATH')
@@ -122,13 +122,13 @@ def build_codebook_from_name(experiment_name, experiment_group='', return_datase
         x = tf.placeholder(tf.float32, [None,] + list(dataset.shape))
         encoder = build_encoder(x, args)
         codebook = build_codebook(encoder, dataset, args)
-        if return_decoder:
+        if return_coder:
             reconst_target = tf.placeholder(tf.float32, [None,] + list(dataset.shape))
             decoder = build_decoder(reconst_target, encoder, args)
 
     if return_dataset:
-        if return_decoder:
-            return codebook, dataset, decoder
+        if return_coder:
+            return codebook, dataset, encoder, decoder
         else:
             return codebook, dataset
     else:

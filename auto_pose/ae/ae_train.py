@@ -137,6 +137,12 @@ def main():
                     reconstr_train = sess.run(decoder.x,feed_dict={queue.x:this_x})
                     train_imgs = np.hstack(( u.tiles(this_x, 4, 4), u.tiles(reconstr_train, 4,4),u.tiles(this_y, 4, 4)))
                     cv2.imwrite(os.path.join(train_fig_dir,'training_images_%s.png' % i), train_imgs*255)
+
+                    for j in range(16):
+                        pic = this_x[j]
+                        saveImgName = 'training_images_{}_{}.png'.format(i,j)
+                        cv2.imwrite(os.path.join(train_fig_dir,saveImgName), pic*255)
+                    
             else:
 
                 this_x, this_y = sess.run([queue.x, queue.y])
